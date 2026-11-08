@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Curso</title>
+    @vite(['resources/css/tailwind.css'])
+</head>
+<body>
+    <div class="min-h-screen md:flex">
+        <aside class="bg-zinc-900 flex flex-col items-center md:w-60 shrink-0 px-5 py-7 gap-8">
+            <a href="/dashboard" class="block text-xl font-extrabold mt-8 text-white">
+                Meu Curso
+            </a>
+            <nav aria-label="Menu Principal">
+                <ul class="flex text-center flex-col gap-6">
+                    <li>
+                        <a href="/dashboard" class="flex items-center font-semibold h-11 px-3.5 rounded-xl text-white hover:bg-zinc-800 {{ request.url() === '/dashboard' ? 'bg-zinc-800' : '' }}">Inscrições</a>
+                    </li>
+
+                    <li>
+                        <a href="/meusCursos" class="flex items-center font-semibold h-11 px-3.5 rounded-xl text-white hover:bg-zinc-800 {{ request.url() === '/meusCursos' ? 'bg-zinc-800' : '' }}">Meus cursos</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex bg-[#f4f2ee] pt-15 flex-col gap-9 px-17">
+            <section class="flex md:flex-row  md:justify-between  md:items-center  ">
+                
+                <div class="min-w-8">
+                    <h1 class="font-semibold text-2xl text-slate-800"> Olá {{auth.user.fullName || 'teste'}}</h1>
+                    <p class="hidden sm:block font-semibold text-slate-600">Bora continuar aprendendo hoje?</p>
+                </div>
+                
+                <div class="flex gap-2 ">
+                    <label for="buscar_cursos" hidden></label>
+                    <input type="text" name="buscar_cursos" id="buscar_cursos">
+                    
+                    <button >🔔</button>
+                    <button class="rounded-full w-15 h-15 bg-white"></button>                    
+                </div>
+
+            </section>
+
+            {{{ await $slots.main() }}}
+        </main>
+    </div>
+</body>
+</html>

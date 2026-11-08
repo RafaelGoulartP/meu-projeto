@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background: #f1f5f9;
+    color:#0f172a;
+}
+
+.login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.login__card {
+    width: 100%;
+    max-width: 380px;
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+#email {
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    height: 30px;
+    padding: 0px 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+#password{
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    height: 30px;
+    padding: 0px 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.button__confirmar {
+    height: 4vh;
+    min-height: 10px;
+    width: 100%;
+    max-width: 100px;
+    border: 1px none;
+    border-radius: 9px;
+    align-self: center;
+    background: rgba(34, 197, 94, 0.2);
+    color: #15803d;
+    border:  1px solid rgba(34, 197, 94, 0.4);
+    cursor: pointer
+    
+}
+
+.button__confirmar:hover {
+    background: rgba(34, 197, 94, 0.3);
+}
+
+.login__foot{
+    font-size:medium;
+    margin-top: 20px;
+    align-self: flex-end;
+    text-decoration: none;
+}
+
+.login__foot a {
+    text-decoration: none;
+}
+
+

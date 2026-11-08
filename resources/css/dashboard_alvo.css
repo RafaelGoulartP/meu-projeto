@@ -1,0 +1,460 @@
+/* =========================================================
+   VARIÁVEIS
+   Cores e medidas que se repetem ficam aqui, num lugar só.
+   Para usar: var(--nome). É o seu "tema", igual ao do Tailwind.
+   ========================================================= */
+:root {
+  --cor-fundo: #f4f2ee;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1b1b1f;
+  --cor-texto-suave: #5a5a63;
+  --cor-borda: #d9d6cf;
+  --cor-lateral: #1b1b1f;
+  --cor-lateral-texto: #c9c7c2;
+  --cor-lateral-ativo: #2e2e35;
+  --cor-destaque: #3347d6;
+  --cor-destaque-escuro: #2537b8;
+
+  --raio: 12px;
+  --espaco: 1rem;
+}
+
+/* =========================================================
+   BASE
+   Estilos gerais do site inteiro, aplicados direto nas tags.
+   ========================================================= */
+
+/* Faz o padding e a borda ficarem DENTRO da largura do elemento.
+   Sem isso, width: 100% + padding passa do tamanho da tela. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+/* Tira a margem padrão que o navegador coloca nos títulos e parágrafos.
+   Assim quem controla o espaço é você, com gap e padding. */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* Esconde da tela, mas o leitor de tela continua lendo.
+   Usado no label da busca. */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   LAYOUT GERAL
+   ========================================================= */
+
+/* Pai da barra lateral e do conteúdo: Flex deixa os dois lado a lado */
+.painel {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   BARRA LATERAL
+   ========================================================= */
+.painel__lateral {
+  width: 240px;
+  flex-shrink: 0; /* impede que a barra seja espremida */
+  padding: 1.75rem 1.25rem;
+  background: var(--cor-lateral);
+  display: flex;
+  flex-direction: column; /* empilha a logo e o menu */
+  gap: 2rem;
+}
+
+.logo {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* Tira as bolinhas e o recuo padrão da lista */
+.menu__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menu__link {
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* altura mínima boa para clicar no celular */
+  padding: 0 0.875rem;
+  border-radius: 10px;
+  color: var(--cor-lateral-texto);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.menu__link:hover {
+  background: var(--cor-lateral-ativo);
+  color: #ffffff;
+}
+
+/* Variação (--ativo): o link da página atual */
+.menu__link--ativo {
+  background: var(--cor-lateral-ativo);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+.painel__conteudo {
+  flex: 1;       /* ocupa todo o espaço que sobrar ao lado da barra */
+  min-width: 0;  /* deixa o conteúdo encolher sem estourar a tela */
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* =========================================================
+   TOPO
+   ========================================================= */
+
+/* Dois grupos: textos na esquerda e ações na direita */
+.topo {
+  display: flex;
+  flex-wrap: wrap; /* em tela pequena, as ações descem para a linha de baixo */
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espaco);
+}
+
+.topo__textos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.topo__titulo {
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+
+.topo__subtitulo {
+  color: var(--cor-texto-suave);
+}
+
+.topo__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* =========================================================
+   CAMPOS E BOTÕES
+   ========================================================= */
+.campo {
+  width: 260px;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 0 var(--espaco);
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  background: var(--cor-superficie);
+  font: inherit; /* o input não herda a fonte sozinho */
+}
+
+/* :focus — quando o campo está selecionado */
+.campo:focus {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+/* Botão principal: escuro, para a ação mais importante */
+.botao-principal {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border: none;
+  border-radius: var(--raio);
+  background: var(--cor-destaque);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none; /* tira o sublinhado, porque aqui o botão é um link */
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.botao-principal:hover {
+  background: var(--cor-destaque-escuro);
+}
+
+/* Botão secundário: claro, com borda */
+.botao-secundario {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.botao-secundario:hover {
+  border-color: var(--cor-texto);
+}
+
+.link {
+  color: var(--cor-texto);
+  font-weight: 600;
+}
+
+/* =========================================================
+   CARD "CONTINUE DE ONDE PAROU"
+   ========================================================= */
+.continuar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 1.75rem;
+  border-radius: 18px;
+  background: var(--cor-superficie);
+}
+
+.continuar__info {
+  flex: 1; /* ocupa o espaço e empurra o botão para a direita */
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.continuar__etiqueta {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto-suave);
+}
+
+.continuar__titulo {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.continuar__aula {
+  color: var(--cor-texto-suave);
+}
+
+/* Barra de progresso + porcentagem na mesma linha */
+.progresso {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.progresso__barra {
+  flex: 1;
+  height: 8px;
+  accent-color: var(--cor-destaque); /* muda a cor da barra pronta do HTML */
+}
+
+.progresso__texto {
+  font-weight: 700;
+}
+
+/* =========================================================
+   DUAS COLUNAS: CURSOS + ENTREGAS
+   ========================================================= */
+.colunas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+/* =========================================================
+   MEUS CURSOS
+   ========================================================= */
+.cursos {
+  flex: 3; /* ocupa 3 partes do espaço, as entregas ocupam 1 */
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+}
+
+.cursos__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cursos__titulo {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* Grid: cria quantas colunas couberem, cada uma com no mínimo 220px */
+.cursos__grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--espaco);
+}
+
+/* =========================================================
+   CARD DE CURSO
+   ========================================================= */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: var(--cor-superficie);
+}
+
+.card__imagem {
+  height: 96px;
+  border-radius: 10px;
+  background: var(--cor-destaque);
+}
+
+.card__titulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.card__descricao {
+  font-size: 0.875rem;
+  color: var(--cor-texto-suave);
+}
+
+.card__progresso {
+  width: 100%;
+  height: 6px;
+  accent-color: var(--cor-texto);
+}
+
+/* =========================================================
+   PRÓXIMAS ENTREGAS
+   ========================================================= */
+.entregas {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+  padding: 1.375rem;
+  border-radius: 16px;
+  background: var(--cor-superficie);
+}
+
+.entregas__titulo {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.entregas__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.entrega {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.75rem;
+  border-radius: var(--raio);
+  background: var(--cor-fundo);
+}
+
+/* Caixinha branca da data */
+.entrega__data {
+  flex-shrink: 0;
+  width: 56px;
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: var(--cor-superficie);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.entrega__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.entrega__titulo {
+  font-weight: 700;
+}
+
+.entrega__curso {
+  font-size: 0.875rem;
+  color: var(--cor-texto-suave);
+}
+
+/* =========================================================
+   CELULAR
+   Media query: só vale quando a tela tem até 768px.
+   É o equivalente ao md: do Tailwind, só que ao contrário.
+   ========================================================= */
+@media (max-width: 768px) {
+  /* Barra lateral em cima, conteúdo embaixo */
+  .painel {
+    flex-direction: column;
+  }
+
+  .painel__lateral {
+    width: 100%;
+  }
+
+  /* No celular o menu fica em linha e quebra se não couber */
+  .menu__lista {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .painel__conteudo {
+    padding: 1.5rem 1rem;
+  }
+}

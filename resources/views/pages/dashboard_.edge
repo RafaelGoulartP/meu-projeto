@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <!-- Faz a página se ajustar à largura do celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel</title>
+  <!-- Carrega o seu CSS pelo Vite do Adonis -->
+  @vite(['resources/css/dashboard.css'])
+</head>
+<body>
+
+  <!-- div só de layout: junta a barra lateral e o conteúdo para o Flex deixar os dois lado a lado -->
+  <div class="painel">
+
+    <!-- ===================== BARRA LATERAL ===================== -->
+    <!-- aside: conteúdo que fica "ao lado" e se repete em todas as telas -->
+    <aside class="painel__lateral">
+
+      <!-- Logo: é um link porque leva para a página inicial -->
+      <a href="/" class="logo">Aprenda+</a>
+
+      <!-- nav: diz que isso é um menu de navegação -->
+      <nav class="menu" aria-label="Menu principal">
+        <!-- Lista de links: a forma semântica de fazer um menu -->
+        <ul class="menu__lista">
+          <!-- aria-current="page" marca qual é a página atual -->
+          <li><a href="/painel" class="menu__link menu__link--ativo" aria-current="page">Painel</a></li>
+          <li><a href="/cursos" class="menu__link">Meus cursos</a></li>
+          <li><a href="/agenda" class="menu__link">Agenda</a></li>
+          <li><a href="/certificados" class="menu__link">Certificados</a></li>
+          <li><a href="/forum" class="menu__link">Fórum</a></li>
+        </ul>
+      </nav>
+
+    </aside>
+
+    <!-- ===================== CONTEÚDO PRINCIPAL ===================== -->
+    <!-- main: o conteúdo exclusivo desta página. Só pode ter um por página -->
+    <main class="painel__conteudo">
+
+      <!-- ---------- TOPO ---------- -->
+      <!-- header: o topo do conteúdo -->
+      <header class="topo">
+
+        <!-- Grupo 1 (vai para a esquerda): os textos -->
+        <div class="topo__textos">
+          <!-- h1: o título principal. Só um por página -->
+          <h1 class="topo__titulo">Olá, Usuário</h1>
+          <p class="topo__subtitulo">Bora continuar aprendendo hoje?</p>
+        </div>
+
+        <!-- Grupo 2 (vai para a direita): busca e botões -->
+        <div class="topo__acoes">
+          <!-- label ligado ao input pelo for/id. A classe esconde ele da tela, mas o leitor de tela ainda lê -->
+          <label for="busca" class="visualmente-oculto">Buscar cursos</label>
+          <!-- type="search": campo de busca. name: o nome que chega no servidor -->
+          <input type="search" name="busca" id="busca" class="campo" placeholder="Buscar cursos...">
+          <!-- type="button": o botão só faz uma ação, não envia formulário -->
+          <button type="button" class="botao-secundario">Notificações</button>
+          <button type="button" class="botao-secundario">Perfil</button>
+        </div>
+
+      </header>
+
+      <!-- ---------- CARD "CONTINUE DE ONDE PAROU" ---------- -->
+      <!-- section: bloco com assunto próprio. aria-labelledby liga a section ao título dela -->
+      <section class="continuar" aria-labelledby="continuar-titulo">
+
+        <!-- div só de layout: agrupa os textos e a barra de progresso -->
+        <div class="continuar__info">
+          <p class="continuar__etiqueta">Continue de onde parou</p>
+          <!-- h2: subtítulo da página -->
+          <h2 id="continuar-titulo" class="continuar__titulo">HTML e CSS do zero</h2>
+          <p class="continuar__aula">Módulo 4 · Aula 3 — Flexbox na prática</p>
+
+          <!-- div só de layout: junta a barra e a porcentagem na mesma linha -->
+          <div class="progresso">
+            <!-- progress: barra de progresso pronta do HTML -->
+            <progress class="progresso__barra" value="62" max="100" aria-label="Progresso do curso">62%</progress>
+            <span class="progresso__texto">62%</span>
+          </div>
+        </div>
+
+        <!-- É um link (e não button) porque leva para outra página -->
+        <a href="/cursos/html-css/aula-3" class="botao-principal">Continuar aula</a>
+
+      </section>
+
+      <!-- div só de layout: deixa "Meus cursos" e "Próximas entregas" lado a lado -->
+      <div class="colunas">
+
+        <!-- ---------- MEUS CURSOS ---------- -->
+        <section class="cursos" aria-labelledby="cursos-titulo">
+
+          <!-- div só de layout: título à esquerda e link "Ver todos" à direita -->
+          <div class="cursos__topo">
+            <h2 id="cursos-titulo" class="cursos__titulo">Meus cursos</h2>
+            <a href="/cursos" class="link">Ver todos</a>
+          </div>
+
+          <!-- div só de layout: a grade (Grid) onde os cards ficam -->
+          <div class="cursos__grade">
+
+            <!-- article: um card que faz sentido sozinho -->
+            <article class="card">
+              <!-- Espaço da imagem do curso -->
+              <div class="card__imagem"></div>
+              <!-- h3: título dentro de uma section que já tem h2 -->
+              <h3 class="card__titulo">HTML e CSS do zero</h3>
+              <p class="card__descricao">24 aulas · Módulo 4</p>
+              <progress class="card__progresso" value="62" max="100" aria-label="Progresso">62%</progress>
+            </article>
+
+            <article class="card">
+              <div class="card__imagem"></div>
+              <h3 class="card__titulo">JavaScript essencial</h3>
+              <p class="card__descricao">30 aulas · Módulo 2</p>
+              <progress class="card__progresso" value="28" max="100" aria-label="Progresso">28%</progress>
+            </article>
+
+            <article class="card">
+              <div class="card__imagem"></div>
+              <h3 class="card__titulo">AdonisJS na prática</h3>
+              <p class="card__descricao">18 aulas · Módulo 1</p>
+              <progress class="card__progresso" value="10" max="100" aria-label="Progresso">10%</progress>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ---------- PRÓXIMAS ENTREGAS ---------- -->
+        <section class="entregas" aria-labelledby="entregas-titulo">
+          <h2 id="entregas-titulo" class="entregas__titulo">Próximas entregas</h2>
+
+          <!-- ul: é uma lista de itens, então usa lista -->
+          <ul class="entregas__lista">
+            <li class="entrega">
+              <!-- time: tag própria para datas. datetime é a data no formato que a máquina entende -->
+              <time class="entrega__data" datetime="2026-10-28">28 out</time>
+              <!-- div só de layout: empilha o título e o nome do curso -->
+              <div class="entrega__info">
+                <p class="entrega__titulo">Projeto: página de login</p>
+                <p class="entrega__curso">HTML e CSS do zero</p>
+              </div>
+            </li>
+
+            <li class="entrega">
+              <time class="entrega__data" datetime="2026-11-02">02 nov</time>
+              <div class="entrega__info">
+                <p class="entrega__titulo">Quiz de funções</p>
+                <p class="entrega__curso">JavaScript essencial</p>
+              </div>
+            </li>
+
+            <li class="entrega">
+              <time class="entrega__data" datetime="2026-11-06">06 nov</time>
+              <div class="entrega__info">
+                <p class="entrega__titulo">Rotas e controllers</p>
+                <p class="entrega__curso">AdonisJS na prática</p>
+              </div>
+            </li>
+          </ul>
+
+          <a href="/agenda" class="botao-secundario">Abrir agenda</a>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    @vite(['resources/css/tailwind.css'])
+
+</head>
+<body>
+    <div class="min-h-screen md:flex">
+        <aside class="bg-zinc-900  flex flex-col  items-center md:w-60 shrink-0 px-5 py-7 gap-8">
+            <a href="/dashboard" class="block text-xl font-extrabold mt-8 text-white">
+                Meu Curso
+            </a>
+            <nav aria-label="Menu Principal">
+                <ul class="flex  text-center flex-col gap-6">
+                    <li>
+                        <a href="/dashboard" class="flex items-center font-semibold text-center h-11 px-3.5 rounded-xl bg-zinc-800 text-white {{request.url() === '/dashboard' ? 'bg-zinc-800' : ''}}">Inscrições</a>
+                    </li>
+                    <li>
+                        <a href="/meusCursos" class="flex items-center font-semibold text-center h-11 px-3.5 rounded-xl  text-white {{request.url() === '/meusCursos' ? 'bg-zinc-800' : '' }}">Meus cursos</a>
+                    </li>
+                    <li></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="flex-1 flex bg-[#f4f2ee] pt-15 flex-col gap-9 px-12">
+            <section class="flex md:flex-row  md:justify-between  md:items-center px-5 ">
+                
+                <div class="min-w-8">
+                    <h1 class="font-semibold text-2xl text-slate-800"> Olá {{auth.user.fullName || 'teste'}}</h1>
+                    <p class="hidden sm:block font-semibold text-slate-600">Bora continuar aprendendo hoje?</p>
+                </div>
+                
+                <div class="flex gap-2 ">
+                    <label for="buscar_cursos" hidden></label>
+                    <input type="text" name="buscar_cursos" id="buscar_cursos">
+                    
+                    <button >🔔</button>
+                    <button class="rounded-full w-15 h-15 bg-white"></button>                    
+                </div>
+
+            </section>
+
+            <section class="flex flex-wrap justify-center lg:flex-row gap-15 md:border border-slate-100  md:items-center  shadow-sm bg-white rounded-xl p-6">
+                <div class="flex justify-center items-center w-60 h-40 shadow-sm bg-[#3347d6]  rounded-xl"><iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/c-hxYlFyzsA?si=hDFaB315SM_D9I74&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                <div class="flex-1 md:text-center flex-col min-w-50 items-center">
+                    
+                    <p class="text-sm font-semibold text-slate-600">continue de onde parou</p>
+                    <h1 class="text-2xl text-slate-800  font-semibold">Html e css do zero</h1>
+                    <p class="ltext-slate-800 font-semibold">modulo 4 aula 4 - flexbox na pratica</p>
+                    <div class="max-w-150 mt-5">
+                        <progress class="barra-progresso" value="62" max="100" aria-label="Progresso"></progress>
+                    </div>
+                </div>
+
+                <button class="bg-black w-60 h-15 rounded-3xl font-bold text-white">Continuar</button>
+            </section>
+
+            <section class="flex flex-col md:max-lg:items-center gap-8">
+                <div>
+                    <h2 class="text-xl font-semibold text-slate-900" id="curso-titulo">Meus cursos</h2>
+                </div>
+                
+                <div class="flex flex-col gap-5 lg:grid grid-cols-3 w-fit lg:gap-20">
+                    <article class="flex flex-col  gap-2 max-w-75 items-center bg-white rounded-2xl p-5">
+                        <div class="flex flex-wrap justify-center items-center w-60 h-40 shadow-sm bg-[#dfb718]  rounded-xl"><iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/c-hxYlFyzsA?si=hDFaB315SM_D9I74&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+                        <h3 class=" font-semibold text-slate-900 wrap-anywhere">Html e css do zero</h3>
+                        <p class="font-semibold text-sm text-slate-700 wrap-anywhere">24 aulas modulo 4</p>
+                        <div class="w-55">
+                            <progress class="barra-progresso" value="77" max="100" aria-label="Progresso"></progress>                        
+                        </div>
+                    </article>
+                    <article class="flex flex-col  gap-2 max-w-75 items-center bg-white rounded-2xl p-5">
+                        <div class="flex flex-wrap justify-center items-center w-60 h-40 shadow-sm bg-[#f2710e]  rounded-xl"><p class="font-stretch-50% text-6xl  text-white"></p></div>
+                        <h3 class=" font-semibold text-slate-900 wrap-anywhere">Html e css do zero</h3>
+                        <p class="font-semibold text-sm text-slate-700 wrap-anywhere">24 aulas modulo 4</p>
+                        <div class="w-55">
+                            <progress class="barra-progresso" value="77" max="100" aria-label="Progresso"></progress>                        
+                        </div>
+                    </article>
+                    <article class="flex flex-col  gap-2 max-w-75 items-center bg-white rounded-2xl p-5">
+                        <div class="flex flex-wrap justify-center items-center w-60 h-40 shadow-sm bg-[#1387e0]  rounded-xl"><p class="font-stretch-50% text-6xl  text-white"></p></div>
+                        <h3 class=" font-semibold text-slate-900 wrap-anywhere">Html e css do zero</h3>
+                        <p class="font-semibold text-sm text-slate-700 wrap-anywhere">24 aulas modulo 4</p>
+                        <div class="w-55">
+                            <progress class="barra-progresso" value="77" max="100" aria-label="Progresso"></progress>                        
+                        </div>
+                        
+                    </article>
+                    <article class="flex flex-col  gap-2 max-w-75 items-center bg-white rounded-2xl p-5">
+                        <div class="flex flex-wrap justify-center items-center w-60 h-40 shadow-sm bg-[#f715dc]  rounded-xl"><p class="font-stretch-50% text-6xl  text-white"></p></div>
+                        <h3 class=" font-semibold text-slate-900 wrap-anywhere">Html e css do zero</h3>
+                        <p class="font-semibold text-sm text-slate-700 wrap-anywhere">24 aulas modulo 4</p>
+                        <div class="w-55">
+                            <progress class="barra-progresso" value="77" max="100" aria-label="Progresso"></progress>                        
+                        </div>
+                    </article>
+                    <article class="flex flex-col  gap-2 max-w-75 items-center bg-white rounded-2xl p-5">
+                        <div class="flex flex-wrap justify-center items-center w-60 h-33 shadow-sm bg-[#0e4bf2]  rounded-xl"><img class="w-full h-full object-cover rounded-xl" src="https://img.youtube.com/vi/JllC7A1doWU/hqdefault.jpg" alt="Html e css do zero"></div>
+                        <h3 class=" font-semibold text-slate-900 wrap-anywhere">Html e css do zero</h3>
+                        <p class="font-semibold text-sm text-slate-700 wrap-anywhere">24 aulas modulo 4</p>
+                        <div class="w-55">
+                            <progress class="barra-progresso" value="77" max="100" aria-label="Progresso"></progress>                        
+                        </div>
+                    </article>
+                    <article class="flex flex-col  gap-2 max-w-75 items-center bg-white rounded-2xl p-5">
+                        <div class="flex flex-wrap justify-center items-center w-60 h-40 shadow-sm bg-[#0ee11c]  rounded-xl"><p class="font-stretch-50% text-6xl  text-white"></p></div>
+                        <h3 class=" font-semibold text-slate-900 wrap-anywhere">Html e css do zero</h3>
+                        <p class="font-semibold text-sm text-slate-700 wrap-anywhere">24 aulas modulo 4</p>
+                        <div class="w-55">
+                            <progress class="barra-progresso" value="77" max="100" aria-label="Progresso"></progress>                        
+                        </div>
+                    </article>
+                </div>
+                
+            </section>
+            <section>
+                <div>
+                    <h2>Proximas entregas</h2>
+                </div>
+                <div>
+                    <article>
+                        <div></div>
+                        <div>
+                            <h3>Projeto:páginas de login</h3>
+                            <p>HTML e CSS do zero</p>
+                        </div>  
+                    </article>
+                    <article>
+                        <div></div>
+                        <div>
+                            <h3>Projeto:páginas de login</h3>
+                            <p>HTML e CSS do zero</p>
+                        </div>  
+                    </article>
+                    <button type="submit">Abrir agenda</button>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+</body>
+</html>

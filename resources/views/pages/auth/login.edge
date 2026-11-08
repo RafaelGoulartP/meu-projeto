@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Entrar</title>
+    @vite(['resources/css/login.css'])
+  </head>
+  <body>
+    <main class="login">
+        <form class="login__card" method="POST" action="/login">
+            {{csrfField()}}
+            <h1>Entrar</h1>
+            <p class="login__sub"> Quem bom te ver de novo!</p>
+            @if(flashMessages.has('error'))
+             <p class="login__error">{{ flashMessages.get('error') }}</p>
+            @end
+
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" value="{{old('email') || ''}}" required/>
+
+            <label for="password">Senha</label>
+            <input type="password" name="password" id="password" required>
+
+            <button class="button__confirmar" type="submit">Entrar</button>
+
+            <p class="login__foot">Não tem conta? <a href="/signup">Criar conta</a></p>
+        </form>
+    </main>
+  </body>
+</html>

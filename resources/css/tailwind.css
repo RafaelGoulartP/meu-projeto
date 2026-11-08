@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+/* Onde o Tailwind procura as classes que você usa */
+@source '../views';
+.barra-progresso {
+    @apply appearance-none w-full h-2 rounded-full overflow-hidden bg-slate-200;
+}
+.barra-progresso::-webkit-progress-bar   { @apply bg-slate-200; }
+.barra-progresso::-webkit-progress-value { @apply bg-blue-600 rounded-full; }
+.barra-progresso::-moz-progress-bar      { @apply bg-blue-600 rounded-full; }
