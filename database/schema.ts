@@ -19,10 +19,14 @@ export class AddISchema extends BaseModel {
 }
 
 export class CourseSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'name', 'updatedAt', 'userId'] as const
+  static $columns = ['caminhoCapa', 'createdAt', 'descricao', 'id', 'name', 'updatedAt', 'userId'] as const
   $columns = CourseSchema.$columns
+  @column()
+  declare caminhoCapa: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
+  @column()
+  declare descricao: string | null
   @column({ isPrimary: true })
   declare id: number
   @column()

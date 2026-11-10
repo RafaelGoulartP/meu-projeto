@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-labelledby="titulo descricao">
+  <title id="titulo">JavaScript</title>
+  <desc id="descricao">Capa do curso: Interatividade na prática</desc>
+  <rect width="800" height="450" fill="#f2db7c"/>
+  <circle cx="735" cy="50" r="180" fill="#332d1c" opacity="0.08"/>
+  <circle cx="735" cy="50" r="120" fill="none" stroke="#332d1c" stroke-width="2" opacity="0.3"/>
+  <g fill="#332d1c" font-family="sans-serif">
+    <text x="55" y="70" font-size="18" letter-spacing="4">MEU CURSO / 02</text>
+    <text x="55" y="270" font-size="62" font-weight="700">JavaScript</text>
+    <text x="58" y="320" font-size="24">Interatividade na prática</text>
+  </g>
+  <path d="M58 370h100" stroke="#332d1c" stroke-width="5"/>
+</svg>
