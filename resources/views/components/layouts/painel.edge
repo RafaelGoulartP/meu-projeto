@@ -23,6 +23,10 @@
                     </li>
                 </ul>
             </nav>
+            <form method="POST" action="/logout" class="md:mt-auto">
+                {{ csrfField() }}
+                <button type="submit" class="h-11 cursor-pointer rounded-xl bg-zinc-800 px-6 font-semibold text-white hover:bg-zinc-700">Sair</button>
+            </form>
         </aside>
 
         <main class="flex-1 flex bg-[#f4f2ee] pt-15 flex-col gap-9 px-17">
