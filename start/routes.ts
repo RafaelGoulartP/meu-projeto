@@ -27,7 +27,10 @@ router
   .group(() => {
     router.on('/dashboard').render('pages/dashboard').as('dashboard')
     router.post('logout', [controllers.Session, 'destroy'])
-    router.on('/meusCursos').render('pages/meusCursos').as('meusCursos')
+    router.get('/meusCursos', [controllers.Cursos, 'index']).as('meusCursos')
+    router.on('/cursos/criar').render('pages/cursos/criar').as('cursos.criar')
+    router.get('/cursos/:id', [controllers.Cursos, 'detalhar']).as('cursos.detalhar')
+    router.post('/cursos', [controllers.Cursos, 'store']).as('cursos.salvar')
   })
   .use(middleware.auth())
 

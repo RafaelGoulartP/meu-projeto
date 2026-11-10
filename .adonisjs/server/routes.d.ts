@@ -12,6 +12,9 @@ export type ScannedRoutes = {
     'dashboard': { paramsTuple?: []; params?: {} }
     'session.destroy': { paramsTuple?: []; params?: {} }
     'meusCursos': { paramsTuple?: []; params?: {} }
+    'cursos.criar': { paramsTuple?: []; params?: {} }
+    'cursos.detalhar': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'cursos.salvar': { paramsTuple?: []; params?: {} }
     'admin.index': { paramsTuple?: []; params?: {} }
     'admin.users.index': { paramsTuple?: []; params?: {} }
   }
@@ -21,6 +24,8 @@ export type ScannedRoutes = {
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'meusCursos': { paramsTuple?: []; params?: {} }
+    'cursos.criar': { paramsTuple?: []; params?: {} }
+    'cursos.detalhar': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.index': { paramsTuple?: []; params?: {} }
     'admin.users.index': { paramsTuple?: []; params?: {} }
   }
@@ -30,6 +35,8 @@ export type ScannedRoutes = {
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'meusCursos': { paramsTuple?: []; params?: {} }
+    'cursos.criar': { paramsTuple?: []; params?: {} }
+    'cursos.detalhar': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.index': { paramsTuple?: []; params?: {} }
     'admin.users.index': { paramsTuple?: []; params?: {} }
   }
@@ -37,6 +44,7 @@ export type ScannedRoutes = {
     'new_account.store': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
     'session.destroy': { paramsTuple?: []; params?: {} }
+    'cursos.salvar': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

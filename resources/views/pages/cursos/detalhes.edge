@@ -1,0 +1,39 @@
+@layouts.painel()
+    <section class="w-full max-w-5xl mx-auto pb-12" aria-labelledby="titulo-curso">
+        <a href="{{ responsavel ? '/meusCursos' : '/dashboard' }}" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900">
+            <span aria-hidden="true">←</span> {{ responsavel ? 'Voltar para meus cursos' : 'Voltar para inscrições' }}
+        </a>
+
+        <article class="mt-7 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="grid lg:grid-cols-2">
+                <div class="bg-zinc-900">
+                    @if(curso.caminhoCapa)
+                        <img src="{{ curso.caminhoCapa }}" alt="Capa do curso {{ curso.name }}" class="aspect-video w-full object-cover lg:h-full">
+                    @else
+                        <div class="flex aspect-video h-full items-center justify-center p-8 text-sm font-semibold text-zinc-300">Curso sem imagem de capa</div>
+                    @end
+                </div>
+                <div class="p-6 md:p-8">
+                    <p class="text-xs font-semibold uppercase tracking-widest text-[#657c4b]">{{ responsavel ? 'Meu curso' : 'Curso' }} <span aria-hidden="true">/</span> #{{ curso.id }}</p>
+                    <h2 id="titulo-curso" class="mt-3 text-3xl font-semibold tracking-tight break-words text-slate-900">{{ curso.name }}</h2>
+                    <p class="mt-3 text-sm text-slate-500">Por {{ curso.responsavel?.fullName || 'Autor não informado' }}</p>
+                    <div class="mt-6 border-t border-slate-100 pt-5">
+                        <h3 class="text-sm font-semibold text-slate-800">Sobre o curso</h3>
+                        <p class="mt-3 whitespace-pre-line break-words text-sm leading-relaxed text-slate-600">{{ curso.descricao || 'Este curso ainda não possui descrição.' }}</p>
+                    </div>
+                    @if(!responsavel)
+                        @if(podeAssistir)
+                            <p class="mt-6 text-sm font-semibold text-[#526e38]">Você está inscrito neste curso.</p>
+                        @else
+                            <form method="POST" action="/cursos/{{ curso.id }}/inscricoes" class="mt-6">
+                                {{ csrfField() }}
+                                <button type="submit" class="cursor-pointer rounded-xl bg-[#d9efb5] px-6 py-3 text-sm font-semibold text-[#354b26] hover:bg-[#c6e59a]">Inscrever-me</button>
+                            </form>
+                        @end
+                    @end
+                </div>
+            </div>
+        </article>
+
+    </section>
+@end

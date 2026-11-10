@@ -2,25 +2,32 @@
     <section>
         <div class="flex flex-row justify-between mt-10">
             <h2 class="text-2xl font-semibold text-slate-900">Meus Cursos</h2>
-            <button class="max-w-40 p-4 bg-black rounded-2xl text-white font-semibold" onclick="document.getElementById('modal-criar-curso').showModal()">Criar Cursos</button>
+            <a href="/cursos/criar" class="inline-flex items-center justify-center px-5 py-3 bg-black rounded-2xl text-white font-semibold hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-900">Criar curso</a>
+        </div>
 
-            <dialog id="modal-criar-curso" class="m-auto text-center max-w-100 w-full  bg-white rounded-xl p-8">
-                <form method="POST" action="/courses">
-                    {{csrfField()}}
-                    <h1 class="text-2xl font-semibold tex">Curso</h1>
-                    <div class="w-full flex flex-col gap-5 mt-5 ">
-                        <div class="flex flex-col items">
-                            <label class="font-semibold" for="Nome_curso">Nome do curso</label>
-                            <input type="text" name="Nome_curso" id="Nome_curso" class="m-auto border-slate-100 shadow-md px-2 py-1 max-w-100 bg-slate-200 rounded-2xl" placeholder="EX:Html e Css">
-                        </div>  
-                        <div class="flex flex-row justify-center w-full gap-2 mt-8">
-                            <button type="submit" class="w-30 py-1 font-semibold  rounded-3xl border-0 border-slate-400 bg-[#dbffb6] hover:bg-[#a2ff45] ">Salvar</button>
-                            <button type="button" onclick="document.getElementById('modal-criar-curso').close()" class="w-30 py-1 font-semibold  rounded-3xl border-0 border-slate-400 bg-[#ffb6b6] hover:bg-[#ff3030] ">Cancelar</button>
-                        </div>
+        <div class="grid grid-cols-1 gap-6 mt-8 mb-10 md:grid-cols-2 xl:grid-cols-3">
+            @each(curso in cursos)
+                <article class="overflow-hidden rounded-2xl bg-white shadow-sm">
+                    <a href="/cursos/{{ curso.id }}" class="block h-full hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900" aria-label="Ver detalhes do curso {{ curso.name }}">
+                    @if(curso.caminhoCapa)
+                        <img
+                            src="{{ curso.caminhoCapa }}"
+                            alt="Capa do curso {{ curso.name }}"
+                            class="w-full aspect-video object-cover"
+                            loading="lazy"
+                        >
+                    @end
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold text-slate-900">{{ curso.name }}</h3>
+                        <p class="mt-2 text-sm text-slate-600">
+                            {{ curso.descricao || 'Este curso ainda não possui descrição.' }}
+                        </p>
                     </div>
-                </form>
-                
-            </dialog>
+                    </a>
+                </article>
+            @else
+                <p class="text-slate-600">Você ainda não criou nenhum curso.</p>
+            @end
         </div>
     </section>
 @end
