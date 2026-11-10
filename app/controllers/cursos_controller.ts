@@ -20,10 +20,9 @@ export default class CursosController {
 
   async detalhar({ auth, params, view }: HttpContext) {
     const usuario = auth.getUserOrFail()
-    const curso = await Course.query()
+    const curso = await Course.acessiveisPara(usuario.id)
       .select('id', 'name', 'descricao', 'caminho_capa', 'user_id')
       .where('id', params.id)
-      .where('user_id', usuario.id)
       .preload('responsavel', (consulta) => consulta.select('id', 'full_name'))
       .preload('videos', (consulta) => {
         consulta.select('id', 'name', 'descricao', 'course_id').orderBy('id', 'asc')

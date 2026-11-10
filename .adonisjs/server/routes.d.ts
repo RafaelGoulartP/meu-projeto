@@ -10,6 +10,8 @@ export type ScannedRoutes = {
     'session.create': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'inscricoes.detalhar': { paramsTuple: [ParamValue]; params: {'cursoId': ParamValue} }
+    'inscricoes.salvar': { paramsTuple: [ParamValue]; params: {'cursoId': ParamValue} }
     'session.destroy': { paramsTuple?: []; params?: {} }
     'meusCursos': { paramsTuple?: []; params?: {} }
     'cursos.criar': { paramsTuple?: []; params?: {} }
@@ -26,6 +28,7 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'inscricoes.detalhar': { paramsTuple: [ParamValue]; params: {'cursoId': ParamValue} }
     'meusCursos': { paramsTuple?: []; params?: {} }
     'cursos.criar': { paramsTuple?: []; params?: {} }
     'cursos.detalhar': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -39,6 +42,7 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'inscricoes.detalhar': { paramsTuple: [ParamValue]; params: {'cursoId': ParamValue} }
     'meusCursos': { paramsTuple?: []; params?: {} }
     'cursos.criar': { paramsTuple?: []; params?: {} }
     'cursos.detalhar': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -50,6 +54,7 @@ export type ScannedRoutes = {
   POST: {
     'new_account.store': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
+    'inscricoes.salvar': { paramsTuple: [ParamValue]; params: {'cursoId': ParamValue} }
     'session.destroy': { paramsTuple?: []; params?: {} }
     'videos.salvar': { paramsTuple: [ParamValue]; params: {'cursoId': ParamValue} }
     'cursos.salvar': { paramsTuple?: []; params?: {} }

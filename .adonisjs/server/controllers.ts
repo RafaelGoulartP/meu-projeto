@@ -6,6 +6,7 @@
 export const controllers = {
   AdminUsers: () => import('#controllers/admin_users_controller'),
   Cursos: () => import('#controllers/cursos_controller'),
+  Inscricoes: () => import('#controllers/inscricoes_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Session: () => import('#controllers/session_controller'),
   Videos: () => import('#controllers/videos_controller'),

@@ -25,7 +25,9 @@ router
 
 router
   .group(() => {
-    router.on('/dashboard').render('pages/dashboard').as('dashboard')
+    router.get('/dashboard', [controllers.Inscricoes, 'index']).as('dashboard')
+    router.get('/explorar/cursos/:cursoId', [controllers.Inscricoes, 'detalhar']).as('inscricoes.detalhar')
+    router.post('/cursos/:cursoId/inscricoes', [controllers.Inscricoes, 'store']).as('inscricoes.salvar')
     router.post('logout', [controllers.Session, 'destroy'])
     router.get('/meusCursos', [controllers.Cursos, 'index']).as('meusCursos')
     router.on('/cursos/criar').render('pages/cursos/criar').as('cursos.criar')

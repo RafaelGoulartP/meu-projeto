@@ -51,10 +51,9 @@ export default class VideosController {
 
   async detalhar({ auth, params, view }: HttpContext) {
     const usuario = auth.getUserOrFail()
-    const curso = await Course.query()
+    const curso = await Course.acessiveisPara(usuario.id)
       .select('id', 'name', 'caminho_capa')
       .where('id', params.cursoId)
-      .where('user_id', usuario.id)
       .firstOrFail()
 
     const video = await curso.related('videos').query()
