@@ -32,3 +32,12 @@ router
   .use(middleware.auth())
 
 
+router
+  .group(() => {
+    router.on('/').render('pages/admin/index').as('index')
+
+    // Adicione aqui as futuras rotas de usuários e vídeos.
+  })
+  .prefix('/admin')
+  .as('admin')
+  .use([middleware.auth(), middleware.admin()])
