@@ -72,6 +72,7 @@
     "better-sqlite3": "^13.0.3",
     "edge-iconify": "^2.0.2",
     "edge.js": "^6.5.1",
+    "file-type": "22.2.0",
     "luxon": "^3.7.2",
     "reflect-metadata": "^0.2.2"
   },

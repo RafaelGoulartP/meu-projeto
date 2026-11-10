@@ -44,7 +44,9 @@
                     </div>
                     <p class="mt-2 text-sm text-slate-500">{{ responsavel ? 'Organize os conteúdos do seu curso.' : (podeAssistir ? 'Escolha uma aula para começar a aprender.' : 'Conheça as aulas. Inscreva-se para assistir.') }}</p>
                 </div>
-                <button type="button" disabled class="rounded-xl bg-zinc-100 px-4 py-3 text-sm text-zinc-500">Adicionar vídeo · em breve</button>
+                @if(responsavel)
+                    <a href="/cursos/{{ curso.id }}/videos/criar" class="inline-flex items-center justify-center rounded-xl bg-[#d9efb5] px-4 py-3 text-sm font-semibold text-[#354b26] hover:bg-[#c6e59a] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7f9b60]">Adicionar vídeo</a>
+                @end
             </div>
 
             <ol class="divide-y divide-slate-100">

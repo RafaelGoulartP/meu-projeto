@@ -1,0 +1,77 @@
+@layouts.painel()
+    <section class="w-full max-w-5xl mx-auto pb-12" aria-labelledby="titulo-criar-video">
+        <a href="/cursos/{{ curso.id }}" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900">
+            <span aria-hidden="true">←</span> Voltar para o curso
+        </a>
+
+        <div class="mt-7 mb-8">
+            <p class="text-xs font-semibold uppercase tracking-widest text-[#657c4b]">Uma nova aula para o seu curso</p>
+            <h2 id="titulo-criar-video" class="mt-2 text-3xl font-semibold tracking-tight text-slate-900">Adicionar vídeo</h2>
+            <p class="mt-3 text-sm text-slate-600">Apresente a aula, descreva o conteúdo e escolha o arquivo de vídeo.</p>
+        </div>
+
+        <div class="mb-6 flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4">
+            @if(curso.caminhoCapa)
+                <img src="{{ curso.caminhoCapa }}" alt="" class="h-14 w-24 shrink-0 rounded-lg object-cover">
+            @else
+                <span class="flex h-14 w-24 shrink-0 items-center justify-center rounded-lg bg-[#edf5e5] text-[#526e38]" aria-hidden="true">▷</span>
+            @end
+            <div class="min-w-0">
+                <p class="text-xs text-slate-500">Curso selecionado</p>
+                <p class="mt-1 break-words text-sm font-semibold text-slate-900">{{ curso.name }}</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/cursos/{{ curso.id }}/videos" enctype="multipart/form-data" class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            {{ csrfField() }}
+            <div class="grid gap-8 p-6 md:p-8 xl:grid-cols-5 xl:gap-10">
+                <fieldset class="min-w-0 xl:col-span-3">
+                    <legend class="mb-7 flex items-center gap-3 font-semibold text-slate-900">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#edf5e5] text-sm text-[#526e38]" aria-hidden="true">01</span>
+                        Informações do vídeo
+                    </legend>
+                    <label for="nome" class="block text-sm font-semibold text-slate-800">Nome do vídeo</label>
+                    <input type="text" id="nome" name="nome" value="{{ old('nome') || '' }}" required minlength="3" maxlength="255" placeholder="Ex.: Introdução ao HTML" aria-describedby="ajuda-nome" class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#7f9b60] focus:outline-2 focus:outline-[#d9efb5]">
+                    <p id="ajuda-nome" class="mt-2 text-xs leading-relaxed text-slate-500">Use um título que deixe claro o assunto desta aula.</p>
+                    @if(flashMessages.has('inputErrorsBag.nome'))
+                        <p class="mt-2 text-sm text-red-700" role="alert">{{ flashMessages.get('inputErrorsBag.nome')[0] }}</p>
+                    @end
+
+                    <label for="descricao" class="mt-7 block text-sm font-semibold text-slate-800">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="7" required minlength="10" maxlength="5000" placeholder="Quais assuntos serão abordados neste vídeo?" aria-describedby="ajuda-descricao" class="mt-2 w-full resize-y rounded-xl border border-slate-300 px-4 py-3 text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-[#7f9b60] focus:outline-2 focus:outline-[#d9efb5]">{{ old('descricao') || '' }}</textarea>
+                    <p id="ajuda-descricao" class="mt-2 text-xs leading-relaxed text-slate-500">Conte o que o aluno vai aprender e inclua orientações para acompanhar a aula.</p>
+                    @if(flashMessages.has('inputErrorsBag.descricao'))
+                        <p class="mt-2 text-sm text-red-700" role="alert">{{ flashMessages.get('inputErrorsBag.descricao')[0] }}</p>
+                    @end
+                </fieldset>
+
+                <fieldset class="min-w-0 xl:col-span-2">
+                    <legend class="mb-7 flex items-center gap-3 font-semibold text-slate-900">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#edf5e5] text-sm text-[#526e38]" aria-hidden="true">02</span>
+                        Arquivo da aula
+                    </legend>
+                    <label for="video" class="block cursor-pointer rounded-xl border border-dashed border-[#a5b791] bg-[#f7f9f3] px-5 py-9 text-center hover:bg-[#eff4e7]">
+                        <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#e5edda] text-2xl text-[#526e38]" aria-hidden="true">▷</span>
+                        <span class="mt-4 block text-sm font-semibold text-slate-800">Escolha o vídeo da aula</span>
+                        <span class="mt-2 block text-xs leading-relaxed text-slate-500">Selecione um arquivo no seu computador.</span>
+                    </label>
+                    <input type="file" id="video" name="video" required accept="video/mp4,video/webm" aria-describedby="ajuda-video" class="mt-4 block w-full rounded-lg text-xs text-slate-600 file:mr-3 file:cursor-pointer file:rounded-lg file:border-0 file:bg-zinc-100 file:px-3 file:py-2 file:font-semibold file:text-zinc-800 hover:file:bg-zinc-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7f9b60]">
+                    <p id="ajuda-video" class="mt-3 text-xs leading-relaxed text-slate-500">MP4 ou WebM, até 100 MB. Prefira vídeos na horizontal, com imagem e áudio nítidos.</p>
+                    @if(flashMessages.has('inputErrorsBag.video'))
+                        <p class="mt-2 text-sm text-red-700" role="alert">{{ flashMessages.get('inputErrorsBag.video')[0] }} Selecione o arquivo novamente para enviar.</p>
+                    @end
+
+                    <aside class="mt-6 rounded-xl bg-[#f4f2ee] p-4" aria-label="Dica para a gravação">
+                        <h3 class="text-xs font-semibold text-slate-800">Antes de enviar</h3>
+                        <p class="mt-2 text-xs leading-relaxed text-slate-600">Revise a gravação e confira se o conteúdo combina com o título e a descrição da aula.</p>
+                    </aside>
+                </fieldset>
+            </div>
+
+            <div class="flex flex-col-reverse gap-3 border-t border-slate-100 bg-[#fcfcfa] p-6 sm:flex-row sm:justify-end md:px-8">
+                <a href="/cursos/{{ curso.id }}" class="inline-flex items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-100">Cancelar</a>
+                <button type="submit" class="inline-flex cursor-pointer items-center justify-center rounded-xl bg-[#d9efb5] px-6 py-3 text-sm font-semibold text-[#354b26] hover:bg-[#c6e59a] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7f9b60]">Adicionar vídeo</button>
+            </div>
+        </form>
+    </section>
+@end

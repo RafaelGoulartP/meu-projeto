@@ -10,6 +10,39 @@ import Video from '#models/video'
 test.group('Consulta de vídeos', (group) => {
   group.each.setup(() => testUtils.db().withGlobalTransaction())
 
+  test('responsável abre a página de criação com os dados de seu curso', async ({ assert }) => {
+    const usuario = await User.create({ email: 'video-criar@example.com', password: 'senha-de-teste' })
+    const curso = await Course.create({ name: 'Curso da nova aula', userId: usuario.id })
+    const contexto = {
+      auth: { getUserOrFail: () => usuario }, params: { cursoId: curso.id },
+      view: { render: (template: string, dados: { curso: Course }) => {
+        assert.equal(template, 'pages/videos/criar')
+        assert.equal(dados.curso.id, curso.id)
+        assert.equal(dados.curso.name, curso.name)
+        return 'ok'
+      } },
+    } as unknown as HttpContext
+    assert.equal(await new VideosController().criar(contexto), 'ok')
+  })
+
+  test('página de criação retorna 404 para curso alheio ou inexistente', async ({ assert }) => {
+    const usuario = await User.create({ email: 'video-criar-outro@example.com', password: 'senha-de-teste' })
+    const dono = await User.create({ email: 'video-criar-dono@example.com', password: 'senha-de-teste' })
+    const curso = await Course.create({ name: 'Curso de outra pessoa', userId: dono.id })
+    for (const cursoId of [curso.id, -1]) {
+      const contexto = {
+        auth: { getUserOrFail: () => usuario }, params: { cursoId },
+        view: { render: () => assert.fail('Não deve abrir um curso sem acesso.') },
+      } as unknown as HttpContext
+      try {
+        await new VideosController().criar(contexto)
+        assert.fail('Era esperado um erro 404.')
+      } catch (erro) {
+        assert.propertyVal(erro, 'status', 404)
+      }
+    }
+  })
+
   test('responsável consulta o vídeo com os campos necessários para reprodução', async ({ assert }) => {
     const usuario = await User.create({ email: 'video-dono@example.com', password: 'senha-de-teste' })
     const curso = await Course.create({ name: 'Curso com vídeos', userId: usuario.id })

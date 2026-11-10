@@ -94,7 +94,8 @@ const bodyParserConfig = defineConfig({
      * Maximum limit of data to parse including all files
      * and fields
      */
-    limit: '20mb',
+    // 100 MB de vídeo mais os campos e cabeçalhos do formulário.
+    limit: '105mb',
 
     /**
      * Content types that should be parsed as multipart form data.

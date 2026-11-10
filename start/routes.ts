@@ -31,6 +31,10 @@ router
     router.on('/cursos/criar').render('pages/cursos/criar').as('cursos.criar')
     router.get('/cursos/:id', [controllers.Cursos, 'detalhar']).as('cursos.detalhar')
     router
+      .get('/cursos/:cursoId/videos/criar', [controllers.Videos, 'criar'])
+      .as('videos.criar')
+    router.post('/cursos/:cursoId/videos', [controllers.Videos, 'store']).as('videos.salvar')
+    router
       .get('/cursos/:cursoId/videos/:id', [controllers.Videos, 'detalhar'])
       .as('videos.detalhar')
     router.post('/cursos', [controllers.Cursos, 'store']).as('cursos.salvar')
