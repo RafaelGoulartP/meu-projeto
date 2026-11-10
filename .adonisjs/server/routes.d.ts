@@ -13,6 +13,7 @@ export type ScannedRoutes = {
     'session.destroy': { paramsTuple?: []; params?: {} }
     'meusCursos': { paramsTuple?: []; params?: {} }
     'admin.index': { paramsTuple?: []; params?: {} }
+    'admin.users.index': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'home': { paramsTuple?: []; params?: {} }
@@ -21,6 +22,7 @@ export type ScannedRoutes = {
     'dashboard': { paramsTuple?: []; params?: {} }
     'meusCursos': { paramsTuple?: []; params?: {} }
     'admin.index': { paramsTuple?: []; params?: {} }
+    'admin.users.index': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'home': { paramsTuple?: []; params?: {} }
@@ -29,6 +31,7 @@ export type ScannedRoutes = {
     'dashboard': { paramsTuple?: []; params?: {} }
     'meusCursos': { paramsTuple?: []; params?: {} }
     'admin.index': { paramsTuple?: []; params?: {} }
+    'admin.users.index': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'new_account.store': { paramsTuple?: []; params?: {} }

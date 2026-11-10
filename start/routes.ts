@@ -32,11 +32,18 @@ router
   .use(middleware.auth())
 
 
+
 router
   .group(() => {
-    router.on('/').render('pages/admin/index').as('index')
+    router
+      .get('/', ({ response }) => {
+        return response.redirect().toRoute('admin.users.index')
+      })
+      .as('index')
 
-    // Adicione aqui as futuras rotas de usuários e vídeos.
+    router
+      .get('/usuarios', [controllers.AdminUsers, 'index'])
+      .as('users.index')
   })
   .prefix('/admin')
   .as('admin')

@@ -2,10 +2,127 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8">
-    <title>Back Office</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Usuários · Back Office · Meu Curso</title>
+    <link rel="stylesheet" href="/css/admin.css">
   </head>
   <body>
-    <h1>Back Office</h1>
-    <p>Bem-vindo, {{ auth.user.fullName }}!</p>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <div class="admin-layout">
+      <aside class="sidebar" aria-label="Barra lateral">
+        <a class="brand" href="/admin" aria-label="Meu Curso, início do back office">
+          <span class="brand-mark" aria-hidden="true">m.</span>
+          <span>Meu Curso<small>BACK OFFICE</small></span>
+        </a>
+        <div class="sidebar-section">
+          <p class="nav-label">GERENCIAR</p>
+          <nav aria-label="Navegação administrativa">
+            <a class="nav-item nav-item-active" href="/admin/usuarios" aria-current="page">
+              <span class="nav-symbol" aria-hidden="true">◉</span> Usuários <span class="nav-count">{{ totalUsers }}</span>
+            </a>
+            <span class="nav-item nav-item-unavailable" aria-disabled="true">
+              <span class="nav-symbol" aria-hidden="true">▷</span> Vídeos <span class="soon">Em breve</span>
+            </span>
+          </nav>
+        </div>
+        <div class="sidebar-bottom">
+          <a class="back-link" href="/dashboard"><span aria-hidden="true">↗</span> Ir para a plataforma</a>
+          <div class="admin-profile">
+            <span class="profile-avatar" aria-hidden="true">AD</span>
+            <div><strong>Área administrativa</strong><small>Acesso restrito</small></div>
+            <span class="online-dot" aria-hidden="true"></span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <p class="breadcrumb">Back office <span aria-hidden="true">/</span> <strong>Usuários</strong></p>
+          <span class="access-label"><span aria-hidden="true">●</span> Administrador</span>
+        </header>
+        <main id="conteudo" class="content">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">GESTÃO DA PLATAFORMA</p>
+              <h1>Usuários<span>.</span></h1>
+              <p class="page-description">Uma visão de quem faz parte do Meu Curso.</p>
+            </div>
+          </div>
+
+          <section class="stats" aria-label="Resumo dos usuários">
+            <article class="stat-card">
+              <div class="stat-heading"><h2>Total de usuários</h2><span class="stat-icon" aria-hidden="true">◉</span></div>
+              <p class="stat-number">{{ totalUsers }}</p>
+              <p class="stat-description">Pessoas cadastradas na plataforma</p>
+            </article>
+            <article class="stat-card">
+              <div class="stat-heading"><h2>Usuários comuns</h2><span class="stat-icon stat-icon-green" aria-hidden="true">↗</span></div>
+              <p class="stat-number">{{ totalRegularUsers }}</p>
+              <p class="stat-description">Contas sem acesso administrativo</p>
+            </article>
+            <article class="stat-card">
+              <div class="stat-heading"><h2>Administradores</h2><span class="stat-icon" aria-hidden="true">◇</span></div>
+              <p class="stat-number">{{ totalAdmins }}</p>
+              <p class="stat-description">Contas com acesso ao back office</p>
+            </article>
+          </section>
+
+          <section class="users-panel" aria-labelledby="users-title">
+            <div class="panel-heading">
+              <div class="panel-title"><h2 id="users-title">Todos os usuários</h2><span class="total-pill">{{ totalUsers }} usuários</span></div>
+              <p>Cadastro mais recente primeiro</p>
+            </div>
+            <div class="table-scroll" role="region" aria-label="Lista de usuários; role horizontalmente em telas pequenas" tabindex="0">
+              <table>
+                <caption class="sr-only">Usuários cadastrados na plataforma</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Perfil</th>
+                    <th scope="col" aria-sort="descending">Cadastro <span aria-hidden="true">↓</span></th>
+                    <th scope="col" class="id-column">ID</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @each(user in users)
+                    <tr>
+                      <th scope="row">
+                        <div class="user-cell">
+                          <span class="avatar {{ user.isAdmin ? 'avatar-admin' : 'avatar-green' }}" aria-hidden="true">
+                            {{ (user.fullName || user.email).trim().slice(0, 2).toUpperCase() }}
+                          </span>
+                          <div>
+                            <span class="user-name">{{ user.fullName || 'Sem nome informado' }}</span>
+                            <span class="user-email">{{ user.email }}</span>
+                          </div>
+                        </div>
+                      </th>
+                      <td>
+                        <span class="role-label {{ user.isAdmin ? 'role-admin' : '' }}">
+                          {{ user.isAdmin ? 'Administrador' : 'Usuário' }}
+                        </span>
+                      </td>
+                      <td>
+                        <time datetime="{{ user.createdAt.toISODate() }}">
+                          {{ user.createdAt.toFormat('dd/MM/yyyy') }}
+                        </time>
+                      </td>
+                      <td class="id-column">#{{ user.id }}</td>
+                    </tr>
+                  @else
+                    <tr>
+                      <td colspan="4">Nenhum usuário cadastrado.</td>
+                    </tr>
+                  @end
+                </tbody>
+              </table>
+            </div>
+            <div class="panel-footer"><p>Total de usuários: <strong>{{ totalUsers }}</strong></p></div>
+          </section>
+          <footer class="page-footer"><p>Meu Curso <span aria-hidden="true">/</span> Back Office</p><p>Gestão de usuários da plataforma.</p></footer>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
