@@ -25,6 +25,9 @@ export default class CursosController {
       .where('id', params.id)
       .where('user_id', usuario.id)
       .preload('responsavel', (consulta) => consulta.select('id', 'full_name'))
+      .preload('videos', (consulta) => {
+        consulta.select('id', 'name', 'descricao', 'course_id').orderBy('id', 'asc')
+      })
       .firstOrFail()
 
     return view.render('pages/cursos/detalhes', {

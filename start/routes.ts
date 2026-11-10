@@ -30,6 +30,9 @@ router
     router.get('/meusCursos', [controllers.Cursos, 'index']).as('meusCursos')
     router.on('/cursos/criar').render('pages/cursos/criar').as('cursos.criar')
     router.get('/cursos/:id', [controllers.Cursos, 'detalhar']).as('cursos.detalhar')
+    router
+      .get('/cursos/:cursoId/videos/:id', [controllers.Videos, 'detalhar'])
+      .as('videos.detalhar')
     router.post('/cursos', [controllers.Cursos, 'store']).as('cursos.salvar')
   })
   .use(middleware.auth())

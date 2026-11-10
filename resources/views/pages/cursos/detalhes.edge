@@ -35,5 +35,42 @@
             </div>
         </article>
 
+        <section class="mt-9 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm" aria-labelledby="titulo-videos">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 p-6 md:px-8">
+                <div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <h3 id="titulo-videos" class="text-lg font-semibold text-slate-900">Vídeos do curso</h3>
+                        <span class="rounded-md bg-[#edf5e5] px-2 py-1 text-xs font-medium text-[#526e38]">{{ curso.videos.length }} vídeos</span>
+                    </div>
+                    <p class="mt-2 text-sm text-slate-500">{{ responsavel ? 'Organize os conteúdos do seu curso.' : (podeAssistir ? 'Escolha uma aula para começar a aprender.' : 'Conheça as aulas. Inscreva-se para assistir.') }}</p>
+                </div>
+                <button type="button" disabled class="rounded-xl bg-zinc-100 px-4 py-3 text-sm text-zinc-500">Adicionar vídeo · em breve</button>
+            </div>
+
+            <ol class="divide-y divide-slate-100">
+                @each(video in curso.videos)
+                    <li>
+                        @if(podeAssistir)
+                            <a href="/cursos/{{ curso.id }}/videos/{{ video.id }}" class="flex items-center gap-4 p-6 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 md:px-8">
+                        @else
+                            <div class="flex items-center gap-4 p-6 md:px-8">
+                        @end
+                            <span class="flex h-14 w-20 shrink-0 items-center justify-center rounded-lg bg-[#e5edda] text-xl text-[#526e38]" aria-hidden="true">▷</span>
+                            <div class="min-w-0 flex-1">
+                                <h4 class="break-words text-sm font-semibold text-slate-900">{{ video.name }}</h4>
+                                <p class="mt-1 line-clamp-2 break-words text-xs leading-relaxed text-slate-500">{{ video.descricao || 'Este vídeo ainda não possui descrição.' }}</p>
+                            </div>
+                            <span class="shrink-0 text-xs text-slate-500">{{ podeAssistir ? 'Assistir →' : 'Inscrição necessária' }}</span>
+                        @if(podeAssistir)
+                            </a>
+                        @else
+                            </div>
+                        @end
+                    </li>
+                @else
+                    <li class="p-6 text-sm text-slate-500 md:px-8">Este curso ainda não possui vídeos.</li>
+                @end
+            </ol>
+        </section>
     </section>
 @end
