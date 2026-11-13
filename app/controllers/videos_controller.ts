@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Course from '#models/course'
 import Video from '#models/video'
 import app from '@adonisjs/core/services/app'
+import db from '@adonisjs/lucid/services/db'
 import { randomUUID } from 'node:crypto'
 import { unlink } from 'node:fs/promises'
 import { criarVideoValidator } from '#validators/video'
@@ -57,10 +58,59 @@ export default class VideosController {
       .firstOrFail()
 
     const video = await curso.related('videos').query()
-      .select('id', 'name', 'descricao', 'caminho_video')
+      .select('id', 'name', 'descricao', 'caminho_video', 'views', 'likes')
       .where('id', params.id)
       .firstOrFail()
 
-    return view.render('pages/videos/detalhes', { curso, video })
+    
+    await Video.query().where('id', video.id).increment('views', 1)
+    video.views++
+
+    const curtiu = await db
+      .from('video_likes')
+      .where('user_id', usuario.id)
+      .where('video_id', video.id)
+      .first()
+
+    return view.render('pages/videos/detalhes', { curso, video, curtiu: Boolean(curtiu) })
+  }
+
+  async curtir({ auth, params, response }: HttpContext) {
+    const usuario = auth.getUserOrFail()
+    const curso = await Course.acessiveisPara(usuario.id)
+      .select('id')
+      .where('id', params.cursoId)
+      .firstOrFail()
+
+    const video = await curso.related('videos').query()
+      .select('id')
+      .where('id', params.id)
+      .firstOrFail()
+
+   
+    await db.transaction(async (trx) => {
+      const removidas = await trx
+        .from('video_likes')
+        .where('user_id', usuario.id)
+        .where('video_id', video.id)
+        .delete()
+
+      if (Number(removidas) === 0) {
+        await trx
+          .table('video_likes')
+          .insert({ user_id: usuario.id, video_id: video.id, created_at: new Date() })
+          .onConflict(['user_id', 'video_id'])
+          .ignore()
+      }
+
+      
+      const [{ total }] = await trx
+        .from('video_likes')
+        .where('video_id', video.id)
+        .count('* as total')
+      await trx.from('videos').where('id', video.id).update({ likes: Number(total) })
+    })
+
+    return response.redirect().back()
   }
 }

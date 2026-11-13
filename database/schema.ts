@@ -69,6 +69,17 @@ export class UserSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class VideoLikeSchema extends BaseModel {
+  static $columns = ['createdAt', 'userId', 'videoId'] as const
+  $columns = VideoLikeSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare userId: number
+  @column()
+  declare videoId: number
+}
+
 export class VideoSchema extends BaseModel {
   static $columns = ['caminhoVideo', 'courseId', 'createdAt', 'descricao', 'id', 'likes', 'name', 'updatedAt', 'userId', 'views'] as const
   $columns = VideoSchema.$columns
